@@ -1,0 +1,38 @@
+language: "ja-JP"
+
+reviews:
+  auto_review:
+    enabled: true
+    base_branches:
+      - ".*"
+
+  profile: "assertive"
+  review_status: true
+
+  path_instructions:
+    - path: "**/*"
+      instructions: |
+        最優先: docs/ai/PROJECT_CONTEXT.md の方針に従うこと。
+
+        前提:
+        - 加美電機の内製ツール。製造現場・品質（AOI/ICT等）に関わる。
+        - 既存LAMP（Linux/Apache/MySQL(MariaDB)/PHP）で運用される前提。
+        - ただし本リポジトリでは C# / Python ツールも扱う（言語は問わず方針は共通）。
+        - 大規模刷新や追加基盤要求は原則しない。
+
+        実装方針:
+        - 可読性・デバッグ容易性・修正可能性を最優先。過剰設計/過剰抽象化は禁止。
+        - フレームワークは導入理由が明確で保守性が上がる場合のみ可。
+        - ORMは状況次第。JOIN/集計/複雑条件が絡むなら、SQLが明確ならSQL優先。
+        - コメントは可能な限り残す（特に why/前提/業務的意味/例外/暫定処置）。
+
+        ドキュメント更新（必須）:
+        - 実装変更がある場合、ドキュメント更新が必須。
+        - 最低限 docs/changes/CHANGELOG.md が更新されているか確認し、未更新なら最優先で指摘する。
+        - DBに関わる変更がある場合 docs/db/DATABASE.md の更新があるか確認し、未更新なら指摘する。
+        - 運用手順や障害対応に影響する場合 docs/runbook/OPERATIONS.md の更新があるか確認し、未更新なら指摘する。
+        - 更新不要の場合は、その理由がPR内に明記されているか確認する。
+
+        レビュー観点:
+        - 正しさ、エッジケース、データ整合性、セキュリティ、運用リスク、性能劣化リスクを重点。
+        - 形式や好みの指摘（bikeshedding）は実害がある場合のみ。
